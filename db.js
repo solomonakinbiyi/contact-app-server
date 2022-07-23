@@ -9,7 +9,11 @@ const devConfig = {
 };
 
 const proConfig = {
-  connectionString: `${process.env.DATABASE_URL}?sslmode=require`,
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+  dialectOptions: {
+    ssl: { require: true },
+  },
 };
 
 const pool = new Pool(
