@@ -178,6 +178,15 @@ export const createContact = async (req, res) => {
     });
   }
 
+  // check if db has user with email
+  const userCredentials = await pool.query(
+    "SELECT email FROM users WHERE email = $1",
+    [owneremail]
+  );
+  if (userCredentials.rows.length === 0) {
+    return res.json("User with email does not exist");
+  }
+
   // save user
   try {
     const newUser = await pool.query(
