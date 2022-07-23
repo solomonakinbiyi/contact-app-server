@@ -7,53 +7,53 @@ export const home = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
-  return res.json("Signup endpoint");
-  // const { name, email, password } = req.body;
-  // // validation
-  // if (!name) {
-  //   return res.json({
-  //     error: "Name is required",
-  //   });
-  // }
-  // if (!email) {
-  //   return res.json({
-  //     error: "Email is required",
-  //   });
-  // }
-  // const emailExists = await pool.query(
-  //   "SELECT email FROM users WHERE email = $1",
-  //   [email]
-  // );
-  // if (emailExists.rows.length === 1) {
-  //   return res.json({
-  //     error: "Email is already taken",
-  //   });
-  // }
-  // if (!password || password.length < 6) {
-  //   return res.json({
-  //     error: "Password is required and should be 6 characters long",
-  //   });
-  // }
-  // if (password.length > 64) {
-  //   return res.json({
-  //     error: "Password should not be more than 64 characters long",
-  //   });
-  // }
-  // // hash password
-  // const hashedPassword = await hashPassword(password);
-  // // save user
-  // try {
-  //   const newUser = await pool.query(
-  //     "INSERT INTO users (email, name, password) VALUES($1,$2,$3) RETURNING *",
-  //     [email, name, hashedPassword]
-  //   );
-  //   return res.json({
-  //     ok: true,
-  //   });
-  // } catch (err) {
-  //   console.log("Signup failed => ", err);
-  //   return res.status(400).send("Error. Try again.");
-  // }
+  // return res.json("Signup endpoint");
+  const { name, email, password } = req.body;
+  // validation
+  if (!name) {
+    return res.json({
+      error: "Name is required",
+    });
+  }
+  if (!email) {
+    return res.json({
+      error: "Email is required",
+    });
+  }
+  const emailExists = await pool.query(
+    "SELECT email FROM users WHERE email = $1",
+    [email]
+  );
+  if (emailExists.rows.length === 1) {
+    return res.json({
+      error: "Email is already taken",
+    });
+  }
+  if (!password || password.length < 6) {
+    return res.json({
+      error: "Password is required and should be 6 characters long",
+    });
+  }
+  if (password.length > 64) {
+    return res.json({
+      error: "Password should not be more than 64 characters long",
+    });
+  }
+  // hash password
+  const hashedPassword = await hashPassword(password);
+  // save user
+  try {
+    const newUser = await pool.query(
+      "INSERT INTO users (email, name, password) VALUES($1,$2,$3) RETURNING *",
+      [email, name, hashedPassword]
+    );
+    return res.json({
+      ok: true,
+    });
+  } catch (err) {
+    console.log("Signup failed => ", err);
+    return res.status(400).send("Error. Try again.");
+  }
 };
 
 export const signin = async (req, res) => {
