@@ -10,7 +10,7 @@ const devConfig = {
 
 const proConfig = {
   // connectionString: process.env.DATABASE_URL,
-  connectionString: process.env.PG_DATABASE,
+  // connectionString: process.env.PG_DATABASE,
   // ssl: true,
   // dialect: "postgres",
   // dialectOptions: {
