@@ -7,6 +7,7 @@ export const home = async (req, res) => {
 };
 
 export const signup = async (req, res) => {
+  return res.json("Signup endpoint");
   // const { name, email, password } = req.body;
   // // validation
   // if (!name) {
