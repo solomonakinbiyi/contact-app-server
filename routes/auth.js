@@ -7,6 +7,7 @@ import {
   getAllUserContacts,
   updateUserContact,
   deleteUserContact,
+  home,
 } from "../controllers/auth";
 
 const router = express.Router();
@@ -15,6 +16,8 @@ const router = express.Router();
 import { requireSignin } from "../middlewares";
 
 // routes
+router.get("/", home);
+
 router.post("/signup", signup);
 router.post("/signin", signin);
 router.get("/current-user", requireSignin, currentUser);

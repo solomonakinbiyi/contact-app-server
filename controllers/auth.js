@@ -2,6 +2,10 @@ import { hashPassword, comparePassword } from "../helpers/auth";
 import jwt from "jsonwebtoken";
 const pool = require("../db");
 
+export const home = async (req, res) => {
+  return res.json("Welcome to the app!");
+};
+
 export const signup = async (req, res) => {
   // const { name, email, password } = req.body;
   // // validation
