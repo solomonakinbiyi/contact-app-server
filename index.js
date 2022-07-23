@@ -9,11 +9,7 @@ const app = express();
 // middlewares
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: [process.env.CLIENT_URL],
-  })
-);
+app.use(cors());
 
 //autoload routes
 readdirSync("./routes").map((r) => app.use("/api", require(`./routes/${r}`)));
