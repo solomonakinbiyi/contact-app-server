@@ -9,7 +9,7 @@ const devConfig = {
 };
 
 const proConfig = {
-  connectionString: `${process.env.DATABASE_URL}?ssl=true`,
+  connectionString: `${process.env.DATABASE_URL}?sslmode=require`,
 };
 
 const pool = new Pool(
