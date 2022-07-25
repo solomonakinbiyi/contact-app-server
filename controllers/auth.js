@@ -151,8 +151,8 @@ export const createContact = async (req, res) => {
     });
   }
   const emailExists = await pool.query(
-    "SELECT email FROM contacts WHERE email = $1",
-    [email]
+    "SELECT email FROM contacts WHERE email = $1 AND owneremail = $2",
+    [email, owneremail]
   );
   if (emailExists.rows.length === 1) {
     return res.json({
